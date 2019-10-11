@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --prod --target=production"
   },
   "private": true,
   "dependencies": {
@@ -49,7 +50,7 @@
     "typescript": "~3.2.2"
   },
   "engines": {
-    "node": "~10.16.0",
-    "npm": "~6.9.0"
+    "node": "~10.15.3",
+    "npm": "~6.10.3"
   }
 }

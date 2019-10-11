@@ -1,0 +1,46 @@
+<div class="container">
+    <h1>Met System Test</h1>
+
+    <label>Category:</label> 
+    <select (change)="onSelect($event.target.value)">
+    <option value="0">--Select Category--</option>
+    <option *ngFor="let category of categories" value= {{category.categoryId}}>{{category.categoryName}}</option>
+    </select>
+
+    <br/><br/>
+
+    <div>
+        <label>Subcategory:</label>
+        <select (change)="onSubSelect($event.target.value)">
+        <option value="0">--Select Sub--</option>
+        <option *ngFor="let subcategory of subcategories " value= {{subcategory.subcategoryId}}>{{subcategory.subcategoryName}}</option>
+        </select>
+    </div>
+    <mat-table #matTables [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="categoryName">
+            <mat-header-cell *matHeaderCellDef> Category Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.categoryName}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="subcategoryName">
+            <mat-header-cell *matHeaderCellDef> Subcategory Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.subcategoryName}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="productName">
+            <mat-header-cell *matHeaderCellDef> <div (mouseover)="addElement()" #product>Product Name</div> </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+                <div *ngIf="element.categoryName != '' && element.subcategoryName != '' && element.productName == ''">
+                    <input type="text" placeholder="Product Name" name="element.productName" value="{{element.productName}}">
+                </div>
+                <div>{{element.productName}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row class="myHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>  
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <p>Select a Category and a Subcategory then hover over the Product Name to create a new input text box</p>
+</div>
+<router-outlet></router-outlet>
